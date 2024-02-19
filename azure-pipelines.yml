@@ -1,0 +1,44 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+namespace TestProject2
+{
+
+    public class SeleniumTestUrl
+    {
+        [Test]
+        public void TestMethod()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Url = "https://demo.wpeverest.com/user-registration/";
+            int milliSeconds = 10000;
+            Thread.Sleep(milliSeconds);
+            driver.Url = "https://demo.wpeverest.com/user-registration/guest-registration-form/";
+            IWebElement textBox = driver.FindElement(By.CssSelector("input[type='text']"));
+            textBox.SendKeys("Vikas");
+            
+        }
+    }
+}
